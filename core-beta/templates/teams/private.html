@@ -57,7 +57,7 @@
 
               <div class="mb-2">
                 <b>{{ form.country.label(clas="mb-2") }}</b>
-                {{ form.country(class="form-select") }}
+                {{ form.country(class="form-control form-select") }}
                 <small class="form-text text-muted">
                   {{ form.country.description }}
                 </small>
@@ -114,7 +114,7 @@
                   {# Append members to the select choices #}
                   {% set _ = form.captain_id.choices.append((member.id, member.name)) %}
                 {% endfor %}
-                {{ form.captain_id(class="form-select mb-2") }}
+                {{ form.captain_id(class="form-control form-select mb-2") }}
               </div>
               <div id="results">
                 <div
@@ -203,7 +203,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">{% trans %}No{% endtrans %}</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal"{% trans %}>No{% endtrans %}</button>
           <button type="button" class="btn btn-primary" @click="disbandTeam()" :disabled="errors.length > 0">{% trans %}Yes{% endtrans %}</button>
         </div>
       </div>
@@ -232,16 +232,6 @@
             {{ lookup_country_code(team.country) }}
           </span>
         </h3>
-      {% endif %}
-
-      {% if team.bracket_id %}
-        <div class="pt-2">
-          <h2>
-            <span class="badge text-bg-light">
-              {{ team.bracket.name }}
-            </span>
-          </h2>
-        </div>
       {% endif %}
 
       {% for field in team.fields %}
@@ -323,11 +313,11 @@
     <div class="row min-vh-25">
       <div class="col-md-12">
         <h3>{% trans %}Members{% endtrans %}</h3>
-        <table class="table table-striped align-middle">
+        <table class="table table-striped">
           <thead>
           <tr>
-            <th>{% trans %}User Name{% endtrans %}</th>
-            <th>{% trans %}Score{% endtrans %}</th>
+            <td><b>{% trans %}User Name{% endtrans %}</b></td>
+            <td><b>{% trans %}Score{% endtrans %}</b></td>
           </tr>
           </thead>
           <tbody>
@@ -338,9 +328,6 @@
                 <a href="{{ url_for('users.public', user_id=member.id) }}">
                   {{ member.name }}
                 </a>
-                {% if member.bracket_id %}
-                  <span class="badge bg-secondary ms-2">{{ member.bracket.name }}</span>
-                {% endif %}
                 {% if team.captain_id == member.id %}
                   <span class="badge bg-primary ms-2">{% trans %}Captain{% endtrans %}</span>
                 {% endif %}
@@ -382,13 +369,13 @@
       <div class="row">
         <div class="col-md-12">
           <h3>{% trans %}Solves{% endtrans %}</h3>
-          <table class="table table-striped align-middle">
+          <table class="table table-striped">
             <thead>
             <tr>
-              <th>{% trans %}Challenge{% endtrans %}</th>
-              <th class="d-none d-md-block d-lg-block">{% trans %}Category{% endtrans %}</th>
-              <th>{% trans %}Value{% endtrans %}</th>
-              <th>{% trans %}Time{% endtrans %}</th>
+              <td><b>{% trans %}Challenge{% endtrans %}</b></td>
+              <td class="d-none d-md-block d-lg-block"><b>{% trans %}Category{% endtrans %}</b></td>
+              <td><b>{% trans %}Value{% endtrans %}</b></td>
+              <td><b>{% trans %}Time{% endtrans %}</b></td>
             </tr>
             </thead>
             <tbody>
